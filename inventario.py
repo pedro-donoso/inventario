@@ -76,4 +76,21 @@ def modificar_producto():
         print("No encontrado")
 
 
+def eliminar_producto():
+    print("\n--- ELIMINAR PRODUCTO ---")
+    busqueda = input("Nombre del producto a eliminar: ").lower()
+
+    with open(ARCHIVO, 'r', encoding='utf-8') as f:
+        lineas = f.readlines()
+
+    nuevas_lineas = [l for l in lineas if busqueda not in l.lower()]
+
+    if len(nuevas_lineas) < len(lineas):
+        with open(ARCHIVO, 'w', encoding='utf-8') as f:
+            f.writelines(nuevas_lineas)
+        print("Producto eliminado")
+    else:
+        print("No encontrado")
+
+
 
