@@ -106,4 +106,13 @@ def ver_atributos():
     print(f"Productos: {productos}")
 
 
+def crear_backup():
+    print("\n--- CREAR BACKUP ---")
+    if not os.path.exists('backups'):
+        os.makedirs('backups')
+
+    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+    backup = f"backups/inventario_{timestamp}.txt"
+    shutil.copy2(ARCHIVO, backup)
+    print("Backup creado: {backup}")
 
