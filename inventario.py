@@ -93,4 +93,17 @@ def eliminar_producto():
         print("No encontrado")
 
 
+def ver_atributos():
+    print("\n--- ATRIBUTOS DEL ARCHIVO ---")
+    tamano = os.path.getsize(ARCHIVO)
+    fecha = datetime.fromtimestamp(os.path.getmtime(ARCHIVO))
+
+    with open(ARCHIVO, 'r') as f:
+        productos = len(f.readlines())
+
+    print(f"Tamaño: {tamano} bytes")
+    print(f"Última modificación: {fecha.strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Productos: {productos}")
+
+
 
