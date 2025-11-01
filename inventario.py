@@ -38,15 +38,16 @@ def registrar_producto():
 def buscar_producto():
     print("\n--- BUSCAR PRODUCTO ---")
     busqueda = input("Nombre del producto: ").lower()
-
-    with open(ARCHIVO, "r", encoding="utf-8") as f:
-        encontrado = False
+    
+    encontrado = False
+    with open(ARCHIVO, 'r', encoding='utf-8') as f:
         for linea in f:
             if busqueda in linea.lower():
-                print(f"Encontrado: {linea.strip()}")
+                print(f"✓ Encontrado: {linea.strip()}")
                 encontrado = True
-            if not encontrado:
-                print("No encontrado")
+    
+    if not encontrado:
+        print("✗ No encontrado")
 
 
 def modificar_producto():
@@ -114,7 +115,7 @@ def crear_backup():
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     backup = f"backups/inventario_{timestamp}.txt"
     shutil.copy2(ARCHIVO, backup)
-    print("Backup creado: {backup}")
+    print(f"Backup creado: {backup}")
 
 
 def menu():
