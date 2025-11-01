@@ -1,5 +1,7 @@
 import os
+
 import shutil
+
 from datetime import datetime
 
 ARCHIVO = 'inventario.txt'
@@ -30,4 +32,20 @@ def registrar_producto():
     with open(ARCHIVO, 'a', encoding='utf-8') as f:
         f.write(f"\n{nombre}, {precio}, {cantidad}, {talla}")
     print("Producto agregado")
+
+
+def buscar_producto():
+    print("\n--- BUSCAR PRODUCTO ---")
+    busqueda = input("Nombre del producto: ").lower()
+
+    with open(ARCHIVO, 'r', encoding='utf-8') as f:
+        encontrado = False
+        for linea in f:
+            if busqueda in linea.lower():
+                print(f"Encontrado: {linea.strip()}")
+                encontrado = True
+            if not encontrado:
+                print("No encontrado")
+
+
 
