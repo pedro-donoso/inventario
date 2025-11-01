@@ -48,4 +48,32 @@ def buscar_producto():
                 print("No encontrado")
 
 
+def modificar_producto():
+    print("\n--- MODIFICAR PRODUCTO ---")
+    busqueda = input("Nombre del producto a modificar: ").lower()
+
+    with open(ARCHIVO, 'r', encoding='utf-8') as f:
+        lineas = f.readlines()
+
+    nuevas_lineas = []
+    encontrado = False
+
+    for linea in lineas:
+        if busqueda in linea.lower() and not encontrado:
+            print(f"Encontrado: {linea.strip()}")
+            nuevo = input("Nueva línea completa: ")
+            nuevas_lineas.append(nuevo + '\n')
+            encontrado = True
+        else:
+            nuevas_lineas.append(linea)
+
+    
+    if encontrado:
+        with open(ARCHIVO, 'w', encoding='utf-8') as f:
+            f.writelines(nuevas_lineas)
+        print("Producto modificado")
+    else:
+        print("No encontrado")
+
+
 
