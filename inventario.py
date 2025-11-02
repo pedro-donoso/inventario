@@ -26,13 +26,19 @@ def leer_inventario():
 def registrar_producto():
     print("\n--- REGISTRAR PRODUCTO ---")
     nombre = input("Nombre: ")
-    precio = input("Precio: ")
-    cantidad = input("Cantidad: ")
+    precio = input("Precio (agregar USD): ")
+    cantidad = input("Cantidad (agregar unidades): ")
     talla = input("Talla: ")
+    
+    with open(ARCHIVO, 'r', encoding='utf-8') as f:
+        contenido = f.read()
+        necesita_salto = contenido and not contenido.endswith('\n')
 
     with open(ARCHIVO, "a", encoding="utf-8") as f:
-        f.write(f"\n{nombre}, {precio}, {cantidad}, {talla}")
-    print("Producto agregado")
+        if necesita_salto:
+            f.write(f"\n{nombre}, {precio}, {cantidad}, {talla}\n")
+        else:
+            f.write(f"{nombre}, {precio}, {cantidad}, {talla}\n")
 
 
 def buscar_producto():
@@ -100,7 +106,7 @@ def ver_atributos():
     fecha = datetime.fromtimestamp(os.path.getmtime(ARCHIVO))
 
     with open(ARCHIVO, "r") as f:
-        productos = len(f.readlines())
+        productos = len([linea for linea in f.readlines() if linea.strip()])
 
     print(f"Tamaño: {tamano} bytes")
     print(f"Última modificación: {fecha.strftime('%Y-%m-%d %H:%M:%S')}")
